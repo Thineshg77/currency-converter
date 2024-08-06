@@ -68,3 +68,11 @@ select:focus{
   font-weight: bold;
   text-align: center;
 }
+.design{
+  text-align: center;
+  font-size: 14px;
+  margin-top: 30px;
+}
+.design span{
+  font-weight: bold;
+}

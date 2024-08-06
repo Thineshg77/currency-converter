@@ -84,6 +84,7 @@ function App() {
       <div className="result">
         <p>{amount} {froms} is equal to {convertedAmount} {to} </p>
       </div>
+      <div className="design">Desinged by <span>THINESH</span></div>
       </div>
      
     </>
