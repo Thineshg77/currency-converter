@@ -4,7 +4,7 @@ import axios from "axios";
 
 function App() {
   const [amount, setAmount] = useState(1);
-  const [from, setFrom] = useState("USD");
+  const [froms, setFroms] = useState("USD");
   const [to,setTo] = useState("INR");
   const [convertedAmount, setConvertedAmount] = useState(null);
   const [exchangerate, setExchangerate] = useState(null);
@@ -12,29 +12,29 @@ function App() {
   
   useEffect(() => {
     const exchangerate = async () => {
-      try {
-        let url=` https://v6.exchangerate-api.com/v6/8817cb408361713fc96c00e7/latest/${from}`;
-      
-        const res = await axios.get(url)
-        setExchangerate(res.data.rates[to]);
+   try {
+        let url=` https://api.exchangerate-api.com/v4/latest/${froms}`;
+        const response =await axios.get(url)
+        setExchangerate(response.data.rates[to])
       } catch (error) {
-        console.error("Error fetching exchange rate", error);
-      }
-    }
+        console.error("Error fetching exchange rate", error)
+     }
+  }
     exchangerate();
-  }, [from, to]);
+  }, [froms, to]);
+ 
 
   useEffect(() => {
     if (exchangerate !== null) {
       setConvertedAmount((amount * exchangerate).toFixed(2));}
-    }, [amount, exchangerate]);
+   }, [amount, exchangerate]);
 
   const handleamt = (e) => {
     const value = parseFloat(e.target.value);
     setAmount(isNaN(value) ? 0 : value);
   };
   const handlefromcurrency = (e) => {
-    setFrom(e.target.value);
+    setFroms(e.target.value);
   };
  
   const handletocurrency = (e) => {
@@ -52,7 +52,7 @@ function App() {
         <input type="number" value={amount} onChange={handleamt}/>
       </div>
       <div className="from">
-        <label htmlFor="frm" value={from} onChange={handlefromcurrency}>From currency</label>
+        <label htmlFor="frm" value={froms} onChange={handlefromcurrency}>From currency</label>
         <select name="" id="frm">
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
@@ -67,8 +67,8 @@ function App() {
         </select>
       </div>
       <div className="too">
-        <label htmlFor="to" value={to} onChange={handletocurrency}>To curr</label>
-        <select name="" id="to">
+        <label htmlFor="tooo" value={to} onChange={handletocurrency}>To currency</label>
+        <select name="" id="to00">
         <option value="INR">INR</option>
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
@@ -82,7 +82,7 @@ function App() {
         </select>
       </div>
       <div className="result">
-        <p>{amount} {from} is equal to {convertedAmount} {to} </p>
+        <p>{amount} {froms} is equal to {convertedAmount} {to} </p>
       </div>
       </div>
      
